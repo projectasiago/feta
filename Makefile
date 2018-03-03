@@ -1,8 +1,18 @@
-all: empty
-	RUST_TARGET_PATH=$(shell pwd) xargo build --target x86_64-unknown-efi
-
-clean:
-	@rm -rf build target
+.PHONY:
+all: build-release
 
 .PHONY:
-empty:
+build:
+	@cargo build
+
+.PHONY:
+build-release:
+	@cargo build --release
+
+.PHONY:
+test:
+	@cargo test
+
+.PHONY:
+clean:
+	@rm -rf build target
