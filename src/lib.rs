@@ -34,3 +34,22 @@ impl<T> RemoveWhere<T> for Vec<T> {
 		self.retain(|c: &T| !f(c))
 	}
 }
+
+/// Replaces all lowercase characters with uppercase ones.
+/// ```
+/// # use projectasiago_feta as feta;
+/// assert_eq!(feta::replace_lowercase_digits(&mut vec!['a']), &mut vec!['A']);
+/// assert_eq!(feta::replace_lowercase_digits(&mut vec!['Z']), &mut vec!['Z']);
+/// assert_eq!(feta::replace_lowercase_digits(&mut vec!['a', 'z']), &mut vec!['A', 'Z']);
+/// ```
+pub fn replace_lowercase_digits(digits: &mut Vec<char>) -> &mut Vec<char> {
+	for d in digits.iter_mut() {
+		let mut ascii = *d as u8;
+		if 'a' as u8 <= ascii && ascii <= 'z' as u8 {
+			ascii = ascii - 'a' as u8 + 'A' as u8;
+			*d = ascii as char;
+		}
+	}
+	
+	return digits;
+}
